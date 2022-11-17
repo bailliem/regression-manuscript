@@ -8,7 +8,7 @@ execute:
 
 book:
   title: "Regression without regrets"
-  author: "M. Baillie, G. Heinze & M. Huebner"   ## changed
+  author: "M. Baillie, G. Heinze & M. Huebner"
   date: "11/14/2022"  ## changed
   chapters:
     - index.qmd  ## REMOVE
