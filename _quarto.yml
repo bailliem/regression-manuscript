@@ -15,8 +15,8 @@ book:
     #- IDA_framework.qmd ## REMOVE
     #- scope.qmd ## REMOVE
     #- data_screen.qmd ## REMOVE
-    - Bact_intro.qmd ## KEEP - MB CHECKED
-  #  - Bact_IDA_plan.qmd ## KEEP
+    - Bact_intro.qmd ## KEEP - MB CHECKED. TODO how to handle a_bact
+    - Bact_IDA_plan.qmd ## KEEP
   #  - Bact_missing.qmd ## KEEP
   #  - Pseudo_log_explainer.qmd ## KEEP
   #  - Bact_univar.qmd ## long running jobs - use ARd or freeze

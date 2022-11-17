@@ -41,7 +41,7 @@ Display a short summary of the source data set contents. The source data set is 
 ```{r contents_bact,  warning=FALSE, message=FALSE, echo=FALSE, results='asis'} 
 
 ## Load the source dataset from the data folder. 
-bact<-read.csv(here("data-raw", "Bacteremia_public_S2.csv"))
+bact<-read_csv(here("data-raw", "Bacteremia_public_S2.csv"))
 
 html(contents(bact),
             maxlevels = 10,
@@ -51,11 +51,9 @@ html(contents(bact),
 
 An alternative approach to displaying contents. Display the source data dynamically. 
 
-
 ```{r}
-bact %>% DT::datatable()
+#bact %>% DT::datatable()
 ```
-
 
 
 ### Updated analysis dataset
@@ -66,24 +64,10 @@ At the stage we could select the variables of interest to take in to the IDA pha
 
 As a cross check we display the contents again to ensure the additional data is added, and then write  the changes to the data folder in the file **"data/a_bact.rda"**. 
 
-```{r contents_abact, warning=FALSE, message=FALSE, echo=FALSE, results='asis'} 
+```{r contents_abact, warning=FALSE, message=FALSE, echo=FALSE} 
+##TODO: create a single file for generating the analysis data set
 
-## Complete metadata by adding missing labels. 
 ## Generate a derived dataset stored in data as we are adding to the original source dataset obtained. 
-
-#labels_list <- bact.dd$Label
-#units_list <- bact.dd$Units
-
-#names(labels_list) <- names(units_list) <- bact.dd$Variable
-
-## Complete metadata by adding missing labels.
-#a_bact <- Hmisc::upData(
-#  bact,
-#  labels = labels_list[names(bact)], units=units_list[names(bact)])
-
-
-
-#str(bact)
 
 # make copy of bact for analysis data set 
 a_bact <- bact
@@ -91,12 +75,6 @@ a_bact <- bact
 ## Derive outcome variable  TODO: is this is the data dictionary as a derived variable
 a_bact$BC <-   as.numeric(a_bact$BloodCulture=="yes")+0
   
-
-## Add meta data
-#a_bact <- Hmisc::upData(a_bact ,
-#               labels = c(BC = 'bacteremia'), units = c(BC = '0/1'))
-
-
 ## Write to data folder
 save(a_bact, file = here::here("data", "a_bact.rda"))
 ```
