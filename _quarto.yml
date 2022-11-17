@@ -3,7 +3,8 @@ project:
   output-dir: _site
 
 execute:
-  freeze: false
+  cache: true   ## see https://quarto.org/docs/projects/code-execution.html
+  freeze: false 
   echo: false
 
 book:
@@ -12,19 +13,16 @@ book:
   date: today  
   chapters:
     - index.qmd  ## REMOVE
-    #- IDA_framework.qmd ## REMOVE
-    #- scope.qmd ## REMOVE
-    #- data_screen.qmd ## REMOVE
     - Bact_intro.qmd ## KEEP - MB CHECKED. TODO how to handle a_bact
     - Bact_IDA_plan.qmd ## KEEP - MB CHECKED. TODO: docs for a_data
-  #  - Bact_missing.qmd ## KEEP
-  #  - Pseudo_log_explainer.qmd ## KEEP
-  #  - Bact_univar.qmd ## long running jobs - use ARd or freeze
-  #  - Bact_multivar.qmd ## KEEP
-  #  - Bact_suppl.qmd ## ADD
-  #  - Pseudo_log_explainer.qmd ## ADD
-  #  - references.qmd
-    - SessionInfo.qmd
+    - Bact_missing.qmd ## KEEP - MB Checked
+    - Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
+    - _00_Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
+    - Bact_multivar.qmd ## KEEP
+    - Bact_suppl.qmd ## ADD
+    - Pseudo_log_explainer.qmd ## ADD
+    - references.qmd ## MB Checked
+    - SessionInfo.qmd ## MB checked 
   
 
 bibliography: references.bib

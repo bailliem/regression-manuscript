@@ -47,12 +47,8 @@ html(contents(bact),
             maxlevels = 10,
             levelType = 'table')
 
-```
+#An alternative approach to displaying contents. Display the source data dynamically. 
 
-An alternative approach to displaying contents. Display the source data dynamically. 
-
-```{r intro-dt, echo=FALSE, warning=FALSE, message=FALSE}
-bact %>% DT::datatable()
 ```
 
 
