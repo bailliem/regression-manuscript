@@ -15,7 +15,7 @@ load(here::here("data", "a_bact.rda"))
 ```
 
 
-### M1: Prevalence of missing values
+## M1: Prevalence of missing values
 
 Number and percentage of missingness for each predictor, sorted by descending missingness proportion. 
 
@@ -37,7 +37,7 @@ b_bact %>%
 ```
 
 
-### M2: Complete cases
+## M2: Complete cases
 
 Number of available complete cases (outcome and predictors):
 
@@ -66,13 +66,14 @@ b_bact %>%
 ```
 
 
-### ME1: Patterns of missing values
+## ME1: Patterns of missing values
 
-#### Complete cases by strata defined by structural variables
+### Complete cases by strata defined by structural variables
 
 ```{r, message =FALSE, warning =FALSE , echo=FALSE}
 
 ## COMMENT @Mark: can you please make the table nicer? I can't get a proper structure with GENDER and AGEGROUP.
+##TODO
 
 b_bact %>%
   select(GENDER, AGEGROUP) %>%
@@ -98,7 +99,7 @@ b_bact %>%
 ```
 
 
-#### Dendrogram of missingness indicators 
+### Dendrogram of missingness indicators 
 
 The dendrogram depicts the results of a cluster analysis using the complete linkage method based on the percentage of discordant missing indicators. (This percentage was computed via the squared Euclidian distance of missingness indicators between predictors.) The vertical axis shows the distance between two clusters, which is given by the maximum distance between any element of the first and the second clusters.  For example, if two clusters are merged at a height of 25 it means that in 25% of the observations the missingness indicators of the most discordant predictors contained in the two clusters are discordant.
 
