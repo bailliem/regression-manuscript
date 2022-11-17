@@ -10,6 +10,8 @@ library(e1071)   # ADD for skewness and kurtosis
 source(here("R", "ida_plot_univar.R"))  ## function to plot univariate summaries. 
 source(here("R", "ida_plot_univar_orig_vs_trans.R"))  ## function for side-by-side comparison of original vs. transformed scale, calls ida_plot_univar.R
 source(here("R", "ida_trans.R"))  ## function to determine transformation (pseudolog(x, sigma) or identity). 
+source(here("R", "main_descriptives.R"))  ## function to determine transformation (pseudolog(x, sigma) or identity). 
+
 
 ## Load the dataset.
 load(here::here("data", "bact_env_b.rda"))
