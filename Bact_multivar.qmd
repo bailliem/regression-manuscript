@@ -1,4 +1,3 @@
-
 #  Multivariate analyses
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE }
@@ -267,9 +266,3 @@ print(round(red$rsq1,4))
 ```
 
 
-
-## Section session info
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
-sessionInfo()
-```

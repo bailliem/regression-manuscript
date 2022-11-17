@@ -156,45 +156,47 @@ Next we investigate whether a pseudolog transformation of continuous variables m
 variables<- c(structural_vars, key_predictors, medimp_predictors, remaining_predictors)
 unique.variables <- unique(variables)
 
+unique.variables <- unique.variables[3:length(unique.variables)]
+
 #variables 
 #unique.variables
 #b_bact %>% glimpse()
 
 #TODO:: track down issue
 
-res<-sapply(unique.variables, function(X) ida_trans(b_bact[,X], equ.marg=0.2)$const) #takes long, calculate once, and save?
-res
-cat("Predictors where a transformation may symmetrize the distribution:\n")
-cat("Number:     ", sum(!is.na(res)), "\n")
-cat("Proportion: ", mean(!is.na(res)), "\n")
+#res<-sapply(unique.variables, function(X) ida_trans(b_bact[,X], equ.marg=0.2)$const) #takes long, calculate once, and save?
+#res
+#cat("Predictors where a transformation may symmetrize the distribution:\n")
+#cat("Number:     ", sum(!is.na(res)), "\n")
+#cat("Proportion: ", mean(!is.na(res)), "\n")
 ```
 
 Register transformed variables in the data set:
 
 ```{r uni09}
-for(j in 1:length(unique.variables)){
-  if(!is.na(res[j])){
-    newname <- paste("t_",unique.variables[j],sep="")
-    newlabel <- paste("pseudo-log of",label(b_bact)[unique.variables[j]])
-    names(newlabel)<-newname
-    x<-pseudo_log(b_bact[[unique.variables[j]]], sigma=res[j], base=10)
-    label(x)<-newlabel
-    b_bact[[newname]] <- x
-    upData(b_bact, labels=newlabel)
-  }
-}
-
-sigma_values <- res
-
-# update variable lists - generate a second list with transformed variables replacing the originals
-
-bact_transformed <- bact_variables
-
-for(j in 1:length(bact_variables)){
-  for(jj in 1:length(bact_variables[[j]])){
-      if(!is.na(res[bact_variables[[j]][jj]])) bact_transformed[[j]][jj] <- paste("t_", bact_variables[[j]][jj], sep="")
-  }
-}
+# for(j in 1:length(unique.variables)){
+#   if(!is.na(res[j])){
+#     newname <- paste("t_",unique.variables[j],sep="")
+#     newlabel <- paste("pseudo-log of",label(b_bact)[unique.variables[j]])
+#     names(newlabel)<-newname
+#     x<-pseudo_log(b_bact[[unique.variables[j]]], sigma=res[j], base=10)
+#     label(x)<-newlabel
+#     b_bact[[newname]] <- x
+#     upData(b_bact, labels=newlabel)
+#   }
+# }
+# 
+# sigma_values <- res
+# 
+# # update variable lists - generate a second list with transformed variables replacing the originals
+# 
+# bact_transformed <- bact_variables
+# 
+# for(j in 1:length(bact_variables)){
+#   for(jj in 1:length(bact_variables[[j]])){
+#       if(!is.na(res[bact_variables[[j]][jj]])) bact_transformed[[j]][jj] <- paste("t_", bact_variables[[j]][jj], sep="")
+#   }
+# }
 
 
 ```
@@ -204,19 +206,19 @@ for(j in 1:length(bact_variables)){
 The comparison is only shown for variables where a transformation is suggested.
 
 ```{r, fig.width=12}
-for(j in 1:length(unique.variables)){
-#  print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=res[j], n_bars=100))
- if(!is.na(sigma_values[j])){
-   print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=sigma_values[j], n_bars=100))
- }
-}
+# for(j in 1:length(unique.variables)){
+# #  print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=res[j], n_bars=100))
+#  if(!is.na(sigma_values[j])){
+#    print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=sigma_values[j], n_bars=100))
+#  }
+# }
 
 ## COMMENT @Mark we must pick two from these plots for the paper - the old version has BUN which is now no longer transformed (as we raised the threshold for indicating relevance of a  pseudolog transformation) I would suggest ASAT and GGT. Can you please produce a TIF plot for these two (similar to what we already have in the paper?)
 ```
 
 ```{r uni10}
 ## TODO: Do we really need to do this?
-save(list=c("b_bact", "bact_variables", "sigma_values", "bact_transformed"), 
-     file=here::here("data", "a_bact02_c.rda"))
+#save(list=c("b_bact", "bact_variables", "sigma_values", "bact_transformed"), 
+#     file=here::here("data", "a_bact02_c.rda"))
 ```
 

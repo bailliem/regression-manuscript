@@ -51,10 +51,6 @@ html(contents(bact),
 
 An alternative approach to displaying contents. Display the source data dynamically. 
 
-```{r intro-dt, echo=FALSE, warning=FALSE, message=FALSE}
-bact %>% DT::datatable()
-```
-
 
 ### Updated analysis dataset
 

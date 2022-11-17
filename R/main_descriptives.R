@@ -8,8 +8,13 @@ main_descriptives <-
            distinct = TRUE,
            most_frequent = 5) {
 
+    ## mb - check issue is related to tibble
+    x <- as.data.frame(x)
+    
     ran <- c(min(x, na.rm = T), max(x, na.rm = T))
+
     ran <- c(ran, diff(ran))
+
     names(ran) <- c("minimum", "maximum", "range")
     if (!is.null(quantiles))
       quan <- quantile(x, quantiles, na.rm = TRUE)
@@ -50,3 +55,5 @@ main_descriptives <-
       concentration_ratio = concrat
     ))
   }
+
+
