@@ -4,7 +4,7 @@ project:
 
 execute:
   freeze: true
-  echo: false
+  echo: true
 
 book:
   title: "Regression without regrets"
@@ -16,7 +16,7 @@ book:
     #- scope.qmd ## REMOVE
     #- data_screen.qmd ## REMOVE
     - Bact_intro.qmd ## KEEP - MB CHECKED
-    - Bact_IDA_plan.qmd ## KEEP
+  #  - Bact_IDA_plan.qmd ## KEEP
   #  - Bact_missing.qmd ## KEEP
   #  - Pseudo_log_explainer.qmd ## KEEP
   #  - Bact_univar.qmd ## long running jobs - use ARd or freeze
