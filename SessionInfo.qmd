@@ -1,0 +1,7 @@
+# Computing Environment  {#SessionInfo}
+
+Display the computing environment for the analysis. 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+sessionInfo()
+```
