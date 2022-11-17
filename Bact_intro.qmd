@@ -9,6 +9,7 @@ library(Hmisc)
 library(skimr)
 library(janitor)
 library(here)
+library(DT)
 ```
 
 
@@ -26,11 +27,11 @@ We refer to the **source** data as the data set available in this repository. Fi
 ```{r datadict, warning=FALSE, message=FALSE, echo=FALSE}
 ## Read in the source data dictionary and display 
 bact_dd <- readr::read_csv(here::here("data-raw", "Bacteremia_public_S2_Data_Dictionary.csv")) %>%
-  dplyr::arrange(VariableNr) %>%
-  janitor::clean_names()
+  arrange(VariableNr) %>%
+  clean_names()
 
-## dispaly as a table 
-bact_dd %>% gt::gt()
+## display as a table 
+bact_dd %>% gt()
 ```
 
 
@@ -42,23 +43,18 @@ Display a short summary of the source data set contents. The source data set is 
 ## Load the source dataset from the data folder. 
 bact<-read.csv(here("data-raw", "Bacteremia_public_S2.csv"))
 
-html(Hmisc::contents(bact),
+html(contents(bact),
             maxlevels = 10,
             levelType = 'table')
 
-
-#html(contents(bact))
-
-#bact %>% glimpse(width = 100) 
-
 ```
 
-An alternative approach to displaying contents. 
+An alternative approach to displaying contents. Display the source data dynamically. 
 
-```{r skim}
-skimr::skim(bact)
+
+```{r}
+bact %>% DT::datatable()
 ```
-
 
 
 
@@ -94,17 +90,12 @@ a_bact <- bact
 
 ## Derive outcome variable  TODO: is this is the data dictionary as a derived variable
 a_bact$BC <-   as.numeric(a_bact$BloodCulture=="yes")+0
-
+  
 
 ## Add meta data
 #a_bact <- Hmisc::upData(a_bact ,
 #               labels = c(BC = 'bacteremia'), units = c(BC = '0/1'))
 
-
-## Display contents
-#Hmisc::html(Hmisc::contents(a_bact),
-#            maxlevels = 10,
-#            levelType = 'table')
 
 ## Write to data folder
 save(a_bact, file = here::here("data", "a_bact.rda"))
