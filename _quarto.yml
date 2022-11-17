@@ -3,7 +3,8 @@ project:
   output-dir: _site
 
 execute:
-  freeze: true
+  cache: true   ## see https://quarto.org/docs/projects/code-execution.html
+  freeze: false 
   echo: false
 
 book:

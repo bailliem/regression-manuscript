@@ -42,7 +42,7 @@ b_bact %>%
 Number of available complete cases (outcome and predictors):
 
 ```{r, message =FALSE, warning =FALSE , echo=FALSE}
-## COMMENT: is there a way to remove the underliners (e.g. in Key_predictors_only)
+## TODO: COMMENT: is there a way to remove the underliners (e.g. in Key_predictors_only)
 
 b_bact %>%
   select() %>%

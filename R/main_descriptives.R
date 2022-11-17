@@ -7,6 +7,7 @@ main_descriptives <-
            moments = 4,
            distinct = TRUE,
            most_frequent = 5) {
+
     ran <- c(min(x, na.rm = T), max(x, na.rm = T))
     ran <- c(ran, diff(ran))
     names(ran) <- c("minimum", "maximum", "range")
