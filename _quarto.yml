@@ -3,8 +3,8 @@ project:
   output-dir: _site
 
 execute:
-  freeze: true
-  echo: true
+  freeze: false
+  echo: false
 
 book:
   title: "Regression without regrets"
@@ -24,6 +24,8 @@ book:
   #  - Bact_suppl.qmd ## ADD
   #  - Pseudo_log_explainer.qmd ## ADD
   #  - references.qmd
+    - SessionInfo.qmd
+  
 
 bibliography: references.bib
 
