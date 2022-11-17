@@ -17,6 +17,7 @@ book:
     - Bact_IDA_plan.qmd ## KEEP - MB CHECKED. TODO: docs for a_data
     - Bact_missing.qmd ## KEEP - MB Checked
     - Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
+    - _00_Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
     - Bact_multivar.qmd ## KEEP
     - Bact_suppl.qmd ## ADD
     - Pseudo_log_explainer.qmd ## ADD
