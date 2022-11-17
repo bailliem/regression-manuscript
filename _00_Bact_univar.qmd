@@ -110,11 +110,11 @@ COMMENT @Mark is there a way to make nicer looking tables out of the numerical s
 #### Key predictors
 
 ```{r}
-unique.variables <- unique(key_predictors)
-for(j in 1:length(unique.variables)){
-  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
-  print(main_descriptives(b_bact[,unique.variables[j]]))
-}
+# unique.variables <- unique(key_predictors)
+# for(j in 1:length(unique.variables)){
+#   cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
+#   print(main_descriptives(b_bact[,unique.variables[j]]))
+# }
 ```
 
 
@@ -122,21 +122,21 @@ for(j in 1:length(unique.variables)){
 #### Predictors of medium importance
 
 ```{r}
-unique.variables <- unique(medimp_predictors)
-for(j in 1:length(unique.variables)){
-  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
-  print(main_descriptives(b_bact[,unique.variables[j]]))
-}
+# unique.variables <- unique(medimp_predictors)
+# for(j in 1:length(unique.variables)){
+#   cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
+#   print(main_descriptives(b_bact[,unique.variables[j]]))
+# }
 ```
 
 #### Remaining predictors
 
 ```{r}
-unique.variables <- unique(remaining_predictors)
-for(j in 1:length(unique.variables)){
-  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
-  print(main_descriptives(b_bact[,unique.variables[j]]))
-}
+# unique.variables <- unique(remaining_predictors)
+# for(j in 1:length(unique.variables)){
+#   cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
+#   print(main_descriptives(b_bact[,unique.variables[j]]))
+# }
 ```
 
 
