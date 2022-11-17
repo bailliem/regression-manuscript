@@ -1,6 +1,6 @@
 # Bacteremia study  {#Bacteremia}
 
-```{r intro01, echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
+```{r intro01, echo=FALSE, warning=FALSE, message=FALSE}
 ## Load libraries for this chapter
 library(readr)
 library(dplyr)
@@ -51,8 +51,8 @@ html(contents(bact),
 
 An alternative approach to displaying contents. Display the source data dynamically. 
 
-```{r}
-#bact %>% DT::datatable()
+```{r intro-dt, echo=FALSE, warning=FALSE, message=FALSE}
+bact %>% DT::datatable()
 ```
 
 

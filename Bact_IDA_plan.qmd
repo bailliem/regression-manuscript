@@ -1,6 +1,6 @@
 # IDA plan {#IDA_plan}
 
-```{r}
+```{r plan, echo=FALSE, warning=FALSE, message=FALSE}
 library(here)
 library(dplyr)
 library(readr)
@@ -29,7 +29,7 @@ An adequate strategy to cope with missing values will also be chosen after scree
 
 The data dictionary of the bacteremia data set consists of columns for variable names, variable labels, scale of measurement (continuous or categorical), units, plausibility limits, and remarks:
 
-```{r}
+```{r plan02, echo=FALSE, warning=FALSE, message=FALSE}
 ## Read in the analysis data dictionary and display 
 a_bact_dd <- readr::read_csv(here::here("data", "a_bact_data_dictionary.csv")) %>%
   arrange(VariableNr) %>%
@@ -48,7 +48,7 @@ For the purpose of stratifying IDA results by age, age will be categorized into 
 
 The predictor grouping is defined here:
 
-```{r}
+```{r plan03, echo=FALSE, warning=FALSE, message=FALSE}
 #demog_vars <-c("AGE", "SEX")
 structural_vars <- c("AGE", "SEX")
 key_predictors <- c("WBC", "AGE", "BUN","CREA","NEU","PLT")
@@ -123,7 +123,7 @@ A variable clustering analysis will be performed to evaluate which predictors ar
 Variance inflation factors will be computed between the candidate predictors. This will be done for the three possible candidate models, and using all complete cases in the respective candidate predictor sets. Redundancy will further be explored by computing parametric additive models for each predictor in the three candidate models.
 
 
-```{r}
+```{r plan04, echo=FALSE, warning=FALSE, message=FALSE}
 ## TODO - add this to a single analysis_results data set 
 save(list=c("a_bact", "b_bact", "bact_variables",  "structural_vars","key_predictors","medimp_predictors","remaining_predictors"), file = here::here("data", "a_bact.rda"))
 ```
