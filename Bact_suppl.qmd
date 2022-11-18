@@ -1,6 +1,6 @@
 # Supplementary Example
 
-```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+```{r setup2, echo = FALSE, message = FALSE, warning = FALSE}
 library(here)
 library(tidyverse)
 library(Hmisc)
@@ -527,7 +527,7 @@ bind_rows(
 
 Because the fp-transformations further complicate the interpretation of the regression coefficients, let us consider two logisitc regression models with WBC_noNEU and t_WBC_noNEU as single covariate, respectively.
 
-```{r}
+```{r, ex 4 estimates2, message = FALSE, warning = FALSE}
 
 fit_wbc_orig <- glm(BC ~ WBC_noNEU,
                     data = model_df_complete,
