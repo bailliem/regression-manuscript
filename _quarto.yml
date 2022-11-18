@@ -12,18 +12,17 @@ book:
   author: "M. Baillie, G. Heinze & M. Huebner"
   date: today  
   chapters:
-    - index.qmd  ## REMOVE
-    - Bact_intro.qmd ## KEEP - MB CHECKED. TODO how to handle a_bact
-    - Bact_IDA_plan.qmd ## KEEP - MB CHECKED. TODO: docs for a_data
-    - Bact_missing.qmd ## KEEP - MB Checked
-    - Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
-    - _00_Bact_univar.qmd ## long running jobs - use freeze (ARDs?). Issue with functions. 
-    - Bact_multivar.qmd ## KEEP
-    - Bact_suppl.qmd ## ADD
-    - Pseudo_log_explainer.qmd ## ADD
-    - references.qmd ## MB Checked
-    - SessionInfo.qmd ## MB checked 
-  
+    - index.qmd  
+    - Bact_intro.qmd 
+    - Bact_IDA_plan.qmd
+    - Bact_missing.qmd
+    - Bact_univar.qmd  
+    - _00_Bact_univar.qmd ##TODO: merge  
+    - Bact_multivar.qmd
+    - Bact_suppl.qmd 
+    - Pseudo_log_explainer.qmd
+    - references.qmd 
+    - SessionInfo.qmd 
 
 bibliography: references.bib
 
