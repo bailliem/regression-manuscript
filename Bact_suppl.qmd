@@ -1,6 +1,6 @@
 # Supplementary Example
 
-```{r setup2, echo = FALSE, message = FALSE, warning = FALSE}
+```{r setup-suppl, message = FALSE, warning = FALSE}
 library(here)
 library(tidyverse)
 library(Hmisc)

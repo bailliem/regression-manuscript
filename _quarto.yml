@@ -17,7 +17,6 @@ book:
     - Bact_IDA_plan.qmd
     - Bact_missing.qmd
     - Bact_univar.qmd  
-    - _00_Bact_univar.qmd ##TODO: merge  
     - Bact_multivar.qmd
     - Bact_suppl.qmd 
     - Pseudo_log_explainer.qmd
@@ -32,5 +31,6 @@ format:
     css: styles.css
     toc: true
     code-fold: true
+    code-tools: true
     code-summary: "Show the code"
     
