@@ -5,9 +5,9 @@ library(here)
 library(dplyr)
 library(readr)
 library(janitor)
-library(gt)
+library(DT)
 
-load(here("data", "a_bact.rda"))
+load(here("data", "a_bact_01.rda"))
 ```
 
 
@@ -36,7 +36,7 @@ a_bact_dd <- readr::read_csv(here::here("data", "a_bact_data_dictionary.csv")) %
   clean_names()
 
 ## display as a table 
-a_bact_dd %>% gt()
+a_bact_dd %>% DT::datatable(options = list(pageLength = 5))
 ```
 
 
@@ -49,19 +49,42 @@ For the purpose of stratifying IDA results by age, age will be categorized into 
 The predictor grouping is defined here:
 
 ```{r plan03, echo=FALSE, warning=FALSE, message=FALSE}
-#demog_vars <-c("AGE", "SEX")
 structural_vars <- c("AGE", "SEX")
 key_predictors <- c("WBC", "AGE", "BUN","CREA","NEU","PLT")
 medimp_predictors <-c("POTASS", "FIB", "CRP", "ASAT", "ALAT", "GGT")
 outcome_vars <-c("BloodCulture", "BC")
-remaining_predictors <- names(a_bact)[is.na(match(names(a_bact),c("ID", structural_vars, key_predictors,medimp_predictors, outcome_vars)))]
 
-b_bact <- 
-  a_bact %>% mutate(GENDER = factor(SEX, levels=c(1,2),labels=c("male", "female")), AGEGROUP = factor(cut(AGE, c(min(AGE)-1,50, 65, max(AGE))), labels=c("1:(15,50]","2:(50,65]","3:(65,101]")))
+remaining_predictors <-
+  names(a_bact_01)[is.na(match(
+    names(a_bact_01),
+    c(
+      "ID",
+      structural_vars,
+      key_predictors,
+      medimp_predictors,
+      outcome_vars
+    )
+  ))]
+
+a_bact_02 <-
+  a_bact_01 %>% mutate(GENDER = factor(
+    SEX,
+    levels = c(1, 2),
+    labels = c("male", "female")
+  ),
+  AGEGROUP = factor(cut(AGE, c(
+    min(AGE) - 1, 50, 65, max(AGE)
+  )), labels = c("1:(15,50]", "2:(50,65]", "3:(65,101]")))
 
 
-bact_variables <- list(structural_vars=structural_vars, key_predictors=key_predictors, medimp_predictors=medimp_predictors,
-                       remaining_predictors=remaining_predictors, outcome_vars=outcome_vars)
+bact_variables <-
+  list(
+    structural_vars = structural_vars,
+    key_predictors = key_predictors,
+    medimp_predictors = medimp_predictors,
+    remaining_predictors = remaining_predictors,
+    outcome_vars = outcome_vars
+  )
 
 ```
 
@@ -122,8 +145,37 @@ A variable clustering analysis will be performed to evaluate which predictors ar
 
 Variance inflation factors will be computed between the candidate predictors. This will be done for the three possible candidate models, and using all complete cases in the respective candidate predictor sets. Redundancy will further be explored by computing parametric additive models for each predictor in the three candidate models.
 
+## Save data and meta data
+
+Save the updated analysis results data including metadata to file. Also print out the current contents to check for possible errors. 
+
+
+```{r meta-plan, warning=FALSE, message=FALSE, echo=FALSE}
+## Complete metadata by adding missing labels. 
+## Generate a derived dataset stored in data as we are adding to the original source dataset obtained. 
+## Add meta data for derived data
+
+labels_list <- a_bact_dd$label
+units_list <- a_bact_dd$units
+names(labels_list) <- names(units_list) <- a_bact_dd$variable
+
+## Complete metadata by adding missing labels.
+a_bact_02_md <- Hmisc::upData(
+  a_bact_02,
+  labels = labels_list[names(a_bact_02)], units=units_list[names(a_bact_02)])
+
+
+## Display contents
+Hmisc::html(Hmisc::contents(a_bact_02_md),
+            maxlevels = 10,
+            levelType = 'table')
+
+```
+
+
 
 ```{r plan04, echo=FALSE, warning=FALSE, message=FALSE}
 ## TODO - add this to a single analysis_results data set 
-save(list=c("a_bact", "b_bact", "bact_variables",  "structural_vars","key_predictors","medimp_predictors","remaining_predictors"), file = here::here("data", "a_bact.rda"))
+
+save(list=c("a_bact_02", "a_bact_02_md", "bact_variables",  "structural_vars","key_predictors","medimp_predictors","remaining_predictors"), file = here::here("data", "a_bact_02.rda"))
 ```

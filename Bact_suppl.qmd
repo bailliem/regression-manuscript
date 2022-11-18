@@ -13,6 +13,7 @@ library(gt)
 library(stats)
 library(pROC)
 
+
 ## Read data 
 load(here::here("data", "bact_env_suppl.rda"))
 source(here::here("R", "ida_trans.R"))

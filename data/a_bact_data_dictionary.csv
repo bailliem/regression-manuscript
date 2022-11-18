@@ -51,5 +51,7 @@ Source,49,NEUR,Neutrophile ratio,continuous,%,,"Neutrophiles % 15,181 77.7 (68.7
 Source,50,PDW,Platelet distribution width,continuous,%,,"PDW (%) 14,776 12 (10.8?13.4) 12.1 (10.8?13.7) n.s."
 Source,51,RBC,Red blood count,continuous,T/L,,"RBC (T/L) 15,478 3.9 (3.4?4.5) 3.7 (3.2?4.2) ,0.0001 0.567"
 Source,52,WBC,White blood count,continuous,G/L,,"WBC (G/L) 15,477 9.58 (6.64?13.46) 10.205 (6.61?14.86) n.s."
-Source,53,BloodCulture,Blood culture result for bacteremia,nominal,"no, yes",,
+Source,53,BloodCulture,Blood culture result for bacteremia,nominal,"no, yes",,Outcome variable
 Dervived,54,BC,bacteremia,factor ,"0, 1",,Convert BloodCulture into a numeric factor  
+Dervived,55,GENDER,Sex (factors),factor ,"Male, Female",,Convert Sex into a factor 
+Dervived,56,AGEGROUP,Age groups,factor ,"1:(15,50], 2:(50,65], 3:(65,101]",,"Convert age in to groups 1:(15,50]"",""2:(50,65]"",""3:(65,101]"

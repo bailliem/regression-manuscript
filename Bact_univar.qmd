@@ -14,9 +14,12 @@ source(here("R", "ida_plot_univar_orig_vs_trans.R"))  ## function for side-by-si
 source(here("R", "ida_trans.R"))  ## function to determine transformation (pseudolog(x, sigma) or identity). 
 source(here("R", "main_descriptives.R"))  ## function to determine transformation (pseudolog(x, sigma) or identity). 
 
-## Load the dataset.
-load(here::here("data", "a_bact.rda"))
+## Load the dataset for transformations -- todo merge
+load(here::here("data", "bact_env_b.rda"))
 
+
+## Load the dataset.
+load(here::here("data", "a_bact_02.rda"))
 ```
 
 ## U1: Categorical variables
@@ -24,7 +27,7 @@ load(here::here("data", "a_bact.rda"))
 SEX and BC (bactermia status) are described by frequencies and proportions in each category.
 
 ```{r catplot, message=FALSE, warning =FALSE , echo=FALSE}
-b_bact %>%
+a_bact_02_md %>%
   dplyr::select(SEX, BC) %>%
   dplyr::mutate_all(forcats::as_factor) %>%   
   dplyr::mutate_all(forcats::fct_explicit_na, "NA") %>%
@@ -75,27 +78,30 @@ The only structural continuous variables is AGE. This variable is also a key pre
 #### U2: Key predictors
 
 ```{r uni02}
+#| layout-ncol: 2
 unique.variables <- key_predictors
 for(j in 1:length(unique.variables)){
-  print(ida_plot_univar(b_bact, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
+  print(ida_plot_univar(a_bact_02_md, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
 }
 ```
 
 #### U2: Predictors of medium importance
 
 ```{r uni03}
+#| layout-ncol: 2
 unique.variables <- unique(medimp_predictors)
 for(j in 1:length(unique.variables)){
-  print(ida_plot_univar(b_bact, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
+  print(ida_plot_univar(a_bact_02_md, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
 }
 ```
 
 #### U2: Remaining predictors
 
 ```{r uni04}
+#| layout-ncol: 2
 unique.variables <- unique(remaining_predictors)
 for(j in 1:length(unique.variables)){
-  print(ida_plot_univar(b_bact, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
+  print(ida_plot_univar(a_bact_02_md, unique.variables[j], sigma=NA, n_bars=100, transform = FALSE))
 }
 ```
 
@@ -109,11 +115,11 @@ for(j in 1:length(unique.variables)){
 
 unique.variables <- unique(key_predictors)
 #for(j in 1:length(unique.variables)){
-#  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), "]):\n\n")
-#  print(main_descriptives(b_bact[,unique.variables[j]]))
+#  cat("Numerical summary of ", unique.variables[j],"(",label(a_bact_02_md[,unique.variables[j]]), "[", units(a_bact_02_md[,unique.variables[j]]), "]):\n\n")
+#  print(main_descriptives(a_bact_02_md[,unique.variables[j]]))
 #}
 
-b_bact %>%
+a_bact_02 %>%
   select(any_of(unique.variables)) %>%
   skim()
 ```
@@ -123,11 +129,11 @@ b_bact %>%
 ```{r uni06}
 unique.variables <- unique(medimp_predictors)
 #for(j in 1:length(unique.variables)){
-#  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), #"]):\n\n")
-#  print(main_descriptives(b_bact[,unique.variables[j]]))
+#  cat("Numerical summary of ", unique.variables[j],"(",label(a_bact_02_md[,unique.variables[j]]), "[", units(a_bact_02_md[,unique.variables[j]]), #"]):\n\n")
+#  print(main_descriptives(a_bact_02_md[,unique.variables[j]]))
 #}
 
-b_bact %>%
+a_bact_02 %>%
   select(any_of(unique.variables)) %>%
   skim()
 
@@ -138,11 +144,11 @@ b_bact %>%
 ```{r uni07}
 unique.variables <- unique(remaining_predictors)
 #for(j in 1:length(unique.variables)){
-#  cat("Numerical summary of ", unique.variables[j],"(",label(b_bact[,unique.variables[j]]), "[", units(b_bact[,unique.variables[j]]), #"]):\n\n")
-#  print(main_descriptives(b_bact[,unique.variables[j]]))
+#  cat("Numerical summary of ", unique.variables[j],"(",label(a_bact_02_md[,unique.variables[j]]), "[", units(a_bact_02_md[,unique.variables[j]]), #"]):\n\n")
+#  print(main_descriptives(a_bact_02_md[,unique.variables[j]]))
 #}
 
-b_bact %>%
+a_bact_02 %>%
   select(any_of(unique.variables)) %>%
   skim()
 
@@ -156,47 +162,44 @@ Next we investigate whether a pseudolog transformation of continuous variables m
 variables<- c(structural_vars, key_predictors, medimp_predictors, remaining_predictors)
 unique.variables <- unique(variables)
 
-unique.variables <- unique.variables[3:length(unique.variables)]
-
-#variables 
-#unique.variables
-#b_bact %>% glimpse()
-
-#TODO:: track down issue
-
-#res<-sapply(unique.variables, function(X) ida_trans(b_bact[,X], equ.marg=0.2)$const) #takes long, calculate once, and save?
-#res
-#cat("Predictors where a transformation may symmetrize the distribution:\n")
-#cat("Number:     ", sum(!is.na(res)), "\n")
-#cat("Proportion: ", mean(!is.na(res)), "\n")
+# TODO: using b_bact. Track down the formatting issue
+res<-sapply(unique.variables, function(X) ida_trans(b_bact[,X], equ.marg=0.2)$const) #takes long, calculate once, and save?
+res
+cat("Predictors where a transformation may symmetrize the distribution:\n")
+cat("Number:     ", sum(!is.na(res)), "\n")
+cat("Proportion: ", mean(!is.na(res)), "\n")
 ```
 
 Register transformed variables in the data set:
 
 ```{r uni09}
-# for(j in 1:length(unique.variables)){
-#   if(!is.na(res[j])){
-#     newname <- paste("t_",unique.variables[j],sep="")
-#     newlabel <- paste("pseudo-log of",label(b_bact)[unique.variables[j]])
-#     names(newlabel)<-newname
-#     x<-pseudo_log(b_bact[[unique.variables[j]]], sigma=res[j], base=10)
-#     label(x)<-newlabel
-#     b_bact[[newname]] <- x
-#     upData(b_bact, labels=newlabel)
-#   }
-# }
-# 
-# sigma_values <- res
-# 
-# # update variable lists - generate a second list with transformed variables replacing the originals
-# 
-# bact_transformed <- bact_variables
-# 
-# for(j in 1:length(bact_variables)){
-#   for(jj in 1:length(bact_variables[[j]])){
-#       if(!is.na(res[bact_variables[[j]][jj]])) bact_transformed[[j]][jj] <- paste("t_", bact_variables[[j]][jj], sep="")
-#   }
-# }
+
+for(j in 1:length(unique.variables)){
+  if(!is.na(res[j])){
+    newname <- paste("t_",unique.variables[j],sep="")
+    newlabel <- paste("pseudo-log of",label(b_bact)[unique.variables[j]])
+    names(newlabel)<-newname
+    x<-pseudo_log(b_bact[[unique.variables[j]]], sigma=res[j], base=10)
+    label(x)<-newlabel
+    b_bact[[newname]] <- x
+    upData(b_bact, labels=newlabel)
+  }
+}
+
+sigma_values <- res
+
+
+c_bact <- b_bact
+
+# update variable lists - generate a second list with transformed variables replacing the originals
+
+bact_transformed <- bact_variables
+
+for(j in 1:length(bact_variables)){
+  for(jj in 1:length(bact_variables[[j]])){
+      if(!is.na(res[bact_variables[[j]][jj]])) bact_transformed[[j]][jj] <- paste("t_", bact_variables[[j]][jj], sep="")
+  }
+}
 
 
 ```
@@ -205,20 +208,28 @@ Register transformed variables in the data set:
 
 The comparison is only shown for variables where a transformation is suggested.
 
-```{r, fig.width=12}
-# for(j in 1:length(unique.variables)){
-# #  print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=res[j], n_bars=100))
-#  if(!is.na(sigma_values[j])){
-#    print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=sigma_values[j], n_bars=100))
-#  }
-# }
+```{r uni10}
+#| layout-ncol: 2
+for(j in 1:length(unique.variables)){
+#  print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=res[j], n_bars=100))
+ if(!is.na(sigma_values[j])){
+   print(ida_plot_univar_orig_vs_trans(c_bact, unique.variables[j], sigma=sigma_values[j], n_bars=100))
+ }
+}
 
 ## COMMENT @Mark we must pick two from these plots for the paper - the old version has BUN which is now no longer transformed (as we raised the threshold for indicating relevance of a  pseudolog transformation) I would suggest ASAT and GGT. Can you please produce a TIF plot for these two (similar to what we already have in the paper?)
 ```
 
-```{r uni10}
-## TODO: Do we really need to do this?
-#save(list=c("b_bact", "bact_variables", "sigma_values", "bact_transformed"), 
-#     file=here::here("data", "a_bact02_c.rda"))
+
+```{r uni11}
+save(list=c("b_bact", "c_bact", "bact_variables", "sigma_values", "bact_transformed"), 
+     file=here::here("data", "bact_env_c.rda"))
 ```
 
+
+
+## Section session info
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+sessionInfo()
+```
