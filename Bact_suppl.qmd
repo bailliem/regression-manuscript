@@ -1,6 +1,6 @@
 # Supplementary Example
 
-```{r setup2, echo = FALSE, message = FALSE, warning = FALSE}
+```{r setup-suppl, message = FALSE, warning = FALSE}
 library(here)
 library(tidyverse)
 library(Hmisc)
@@ -12,7 +12,6 @@ library(ggthemes)
 library(gt)
 library(stats)
 library(pROC)
-
 
 ## Read data 
 load(here::here("data", "bact_env_suppl.rda"))

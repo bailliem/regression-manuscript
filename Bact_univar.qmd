@@ -209,9 +209,8 @@ for(j in 1:length(bact_variables)){
 The comparison is only shown for variables where a transformation is suggested.
 
 ```{r uni10}
-#| layout-ncol: 2
+#| layout-ncol: 1
 for(j in 1:length(unique.variables)){
-#  print(ida_plot_univar_orig_vs_trans(b_bact, unique.variables[j], sigma=res[j], n_bars=100))
  if(!is.na(sigma_values[j])){
    print(ida_plot_univar_orig_vs_trans(c_bact, unique.variables[j], sigma=sigma_values[j], n_bars=100))
  }
